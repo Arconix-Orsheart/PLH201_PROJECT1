@@ -4,6 +4,10 @@ import org.tuc.Element;
 
 public class SDList extends DList {
 
+    public SDList() {
+        super();
+    }
+
     @Override
     public boolean insert(Element element) {
         Node curr = head;

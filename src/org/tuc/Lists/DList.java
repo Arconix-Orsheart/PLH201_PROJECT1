@@ -30,11 +30,14 @@ public class DList implements List {
 
     @Override
     public boolean insert(Element element) {
-        tail = new Node(element, tail);
-        if (tail == null)
-            return false;
-        if (head == null)
-            head = tail;
+        Node temp = new Node(element);
+        if (head == null) {
+            head = temp;
+            tail = temp;
+        } else {
+            tail.next = temp;
+            tail = temp;
+        }
         return true;
     }
 
@@ -49,7 +52,11 @@ public class DList implements List {
         }
         if (curr == null)
             return false;
-        prev.next = curr.next;
+
+        if (curr == head)
+            head = head.next;
+        else
+            prev.next = curr.next;
         return true;
     }
 

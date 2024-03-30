@@ -1,7 +1,7 @@
 package org.tuc;
 
+import org.tuc.DynamicLists.DList;
 import org.tuc.Elements.IntElement;
-import org.tuc.Lists.DList;
 
 public class App {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package org.tuc.Lists;
+package org.tuc.DynamicLists;
 
 import org.tuc.Element;
 import org.tuc.List;
@@ -7,21 +7,6 @@ public class DList implements List {
 
     Node head;
     Node tail;
-
-    static class Node {
-        Element data;
-        Node next;
-
-        private Node(Element data, Node next) {
-            this.data = data;
-            this.next = next;
-        }
-
-        private Node(Element data) {
-            this(data, null);
-        }
-
-    }
 
     public DList() {
         head = null;
@@ -35,7 +20,7 @@ public class DList implements List {
             head = temp;
             tail = temp;
         } else {
-            tail.next = temp;
+            tail.setNext(temp);
             tail = temp;
         }
         return true;
@@ -46,27 +31,27 @@ public class DList implements List {
         Node curr = head;
         Node prev = null;
 
-        while (curr.data.getKey() != key && curr != null) {
+        while (curr.getElement().getKey() != key && curr != null) {
             prev = curr;
-            curr = curr.next;
+            curr = curr.getNext();
         }
         if (curr == null)
             return false;
 
         if (curr == head)
-            head = head.next;
+            head = head.getNext();
         else
-            prev.next = curr.next;
+            prev.setNext(curr.getNext());
         return true;
     }
 
     @Override
     public Element search(int key) {
         Node res = head;
-        while (res.data.getKey() != key && res != null) {
-            res = res.next;
+        while (res.getElement().getKey() != key && res != null) {
+            res = res.getNext();
         }
-        return res.data;
+        return res.getElement();
     }
 
 }

@@ -1,5 +1,5 @@
-package org.tuc.Lists;
+package org.tuc.DynamicLists;
 
 public class SDList extends DList {
-    
+
 }

@@ -7,6 +7,7 @@ public class AAList implements List {
 
     private static final int defaultSize = 10;
     private int size;
+    private int head;
     private int tail;
     private Element[] listArray;
     private int[] listarray_next;

@@ -6,42 +6,27 @@ import org.tuc.List;
 public class AAList implements List {
 
     private static final int defaultSize = 10;
-    private int msize;
-    private int numInList;
-    private int curr;
-    private int avail;
+    private int size;
+    private int tail;
     private Element[] listArray;
     private int[] listarray_next;
 
-    public AAList(int msize) {
-        this.msize = msize;
-        numInList = curr = 0;
-        listArray = new Element[msize];
-        listarray_next = new int[msize];
-        avail = 0;
-        for (int i = 0; i < msize; i++)
+    public AAList(int size) {
+        this.size = size;
+        tail = 0;
+        listArray = new Element[size];
+        listarray_next = new int[size];
+        for (int i = 0; i < size; i++)
             listarray_next[i] = i + 1;
-        listarray_next[msize - 1] = -1;
+        listarray_next[size - 1] = -1;
     }
 
     public AAList() {
         this(defaultSize);
     }
 
-    private int getNode() {
-        if (avail == -1)
-            return -1;
-        int pos = avail;
-        avail = listarray_next[avail];
-        return pos;
-    }
-
     @Override
     public boolean insert(Element element) {
-        if (curr == -1)
-            return false;
-        listArray[curr] = element;
-        listarray_next[curr] = avail = listarray_next[avail];
 
         return true;
     }

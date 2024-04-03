@@ -1,13 +1,25 @@
 package org.tuc;
 
 import org.tuc.Elements.IntElement;
-import org.tuc.StaticLists.AAList;
+import org.tuc.StaticLists.SAAList;
 
 public class App {
     public static void main(String[] args) {
-        AAList list = new AAList();
+        SAAList list = new SAAList(5);
+
+        // for (int key = 0; list.insert(new IntElement(key, 0)); key++)
+        // ;
 
         list.insert(new IntElement(0, 0));
+        list.insert(new IntElement(2, 0));
+        list.insert(new IntElement(3, 0));
+        list.insert(new IntElement(1, 0));
+        list.insert(new IntElement(-1, 0));
 
+        // list.delete(1);
+        System.out.println(list.search(1));
+        System.out.println(list.search(5));
+
+        System.out.println("YO");
     }
 }

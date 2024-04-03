@@ -13,7 +13,7 @@ public class SDList extends DList {
         Node curr = head;
         Node prev = new Node(null, head);
 
-        while (curr != null && curr.getElement().getKey() <= element.getKey()) {
+        while (curr != null && curr.getElement().getKey() < element.getKey()) {
             prev = curr;
             curr = curr.getNext();
         }

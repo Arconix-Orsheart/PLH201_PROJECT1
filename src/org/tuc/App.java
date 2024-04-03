@@ -16,7 +16,8 @@ public class App {
         list.insert(new IntElement(1, 0));
         list.insert(new IntElement(-1, 0));
 
-        // list.delete(1);
+        list.delete(1);
+        list.insert(new IntElement(5, 0));
         System.out.println(list.search(1));
         System.out.println(list.search(5));
 

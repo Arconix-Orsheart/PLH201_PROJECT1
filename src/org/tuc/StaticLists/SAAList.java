@@ -21,7 +21,7 @@ public class SAAList extends AAList {
         int curr = head;
         int prev = Globals.beforeHead;
 
-        while (listArray[curr] != null && listArray[curr].getKey() < element.getKey()) {
+        while (curr != avail && listArray[curr].getKey() < element.getKey()) {
             prev = curr;
             curr = getNextIndex(curr);
         }

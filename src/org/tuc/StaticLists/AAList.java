@@ -40,7 +40,7 @@ public class AAList implements List {
     private int getPreviousNode(int key) {
         int curr = head;
         int prev = Globals.beforeHead;
-        while (curr != Globals.notFound && listArray[curr] != null && listArray[curr].getKey() != key) {
+        while (curr != avail && listArray[curr].getKey() != key) {
             prev = curr;
             curr = getNextIndex(curr);
         }
@@ -54,6 +54,7 @@ public class AAList implements List {
     }
 
     protected void freeNode(int index) {
+        listArray[index] = null;
         setNextNode(index, avail);
         setNextNode(tail, index);
         avail = index;

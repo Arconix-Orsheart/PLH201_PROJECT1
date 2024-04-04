@@ -33,7 +33,7 @@ public class SAAList extends AAList {
         setNextNode(prev, newNode);
         listArray[newNode] = element;
         setNextNode(newNode, curr);
-        setNextNode(tail, getNextIndex(avail));
+        setNextNode(tail, avail);
 
         return true;
     }

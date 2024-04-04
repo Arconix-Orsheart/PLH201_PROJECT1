@@ -30,8 +30,8 @@ public class SAAList extends AAList {
             return super.insert(element);
 
         int newNode = getAvailNode();
-        setNextNode(prev, newNode);
         listArray[newNode] = element;
+        setNextNode(prev, newNode);
         setNextNode(newNode, curr);
         setNextNode(tail, avail);
 

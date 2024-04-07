@@ -1,7 +1,7 @@
 package org.tuc;
 
 import org.tuc.Elements.IntElement;
-import org.tuc.StaticLists.SAAList;
+import org.tuc.StaticLinkedLists.SAAList;
 
 public class App {
     public static void main(String[] args) {

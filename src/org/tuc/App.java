@@ -1,11 +1,11 @@
 package org.tuc;
 
+import org.tuc.ArrayLists.SAList;
 import org.tuc.Elements.IntElement;
-import org.tuc.StaticLinkedLists.SAAList;
 
 public class App {
     public static void main(String[] args) {
-        SAAList list = new SAAList(5);
+        SAList list = new SAList(5);
 
         // for (int key = 0; list.insert(new IntElement(key, 0)); key++)
         // ;

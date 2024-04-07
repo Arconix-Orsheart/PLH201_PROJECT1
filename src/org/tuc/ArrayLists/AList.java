@@ -1,50 +1,60 @@
 package org.tuc.ArrayLists;
 
 import org.tuc.Element;
+import org.tuc.Globals;
 import org.tuc.List;
 
 public class AList implements List {
 
-    protected static final int defaultSize = 10;
-    protected int head;
-    protected int tail;
+    protected int listSize;
     protected Element[] listArray;
 
     public AList(int size) {
-        head = tail = 0;
+        listSize = 0;
         listArray = new Element[size];
     }
 
     public AList() {
-        this(defaultSize);
+        this(Globals.defaultSize);
     }
 
     @Override
     public boolean insert(Element element) {
-        if (tail >= listArray.length - 1)
+        if (element == null || listSize >= listArray.length)
             return false;
-        listArray[tail + 1] = element;
-        tail++;
+        listArray[listSize++] = element;
         return true;
+    }
+
+    protected int findIndex(int key) {
+        int checkIdx = Globals.notFound;
+        for (int i = 0; i < listSize; i++)
+            if (listArray[i].getKey() == key) {
+                checkIdx = i;
+                break;
+            }
+        return checkIdx;
     }
 
     @Override
     public boolean delete(int key) {
-        int checkidx = -1;
-        for (int i = 0; i <= tail; i++)
-            if (listArray[i].getKey() == key) {
-                checkidx = i;
-                break;
-            }
-        if (checkidx == -1)
+        int checkIdx = findIndex(key);
+        if (checkIdx == Globals.notFound)
             return false;
 
+        for (int i = checkIdx; i < listSize - 1; i++)
+            listArray[i] = listArray[i + 1];
+        listArray[listSize - 1] = null;
+        listSize--;
         return true;
     }
 
     @Override
     public Element search(int key) {
-        return null;
+        int checkIdx = findIndex(key);
+        if (checkIdx == Globals.notFound)
+            return null;
+        return listArray[checkIdx];
 
     }
 

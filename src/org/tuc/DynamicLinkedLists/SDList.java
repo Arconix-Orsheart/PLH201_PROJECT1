@@ -10,6 +10,9 @@ public class SDList extends DList {
 
     @Override
     public boolean insert(Element element) {
+        if (element == null)
+            return false;
+
         Node curr = head;
         Node prev = new Node(null, head);
 

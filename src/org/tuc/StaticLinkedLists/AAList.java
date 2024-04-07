@@ -6,7 +6,6 @@ import org.tuc.List;
 
 public class AAList implements List {
 
-    protected static final int defaultSize = 10;
     protected int head;
     protected int avail;
     protected int tail;
@@ -23,12 +22,12 @@ public class AAList implements List {
     }
 
     public AAList() {
-        this(defaultSize);
+        this(Globals.defaultSize);
     }
 
     @Override
     public boolean insert(Element element) {
-        if (avail == Globals.notFound)
+        if (element == null || avail == Globals.notFound)
             return false;
         int newNode = getAvailNode();
         listArray[newNode] = element;

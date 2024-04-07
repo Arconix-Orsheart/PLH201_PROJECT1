@@ -15,6 +15,8 @@ public class DList implements List {
 
     @Override
     public boolean insert(Element element) {
+        if (element == null)
+            return false;
         Node prev = tail;
         if (head == null)
             tail = head = new Node(element);

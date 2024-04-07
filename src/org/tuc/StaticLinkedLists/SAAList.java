@@ -1,6 +1,7 @@
 package org.tuc.StaticLinkedLists;
 
 import org.tuc.Element;
+import org.tuc.Globals;
 
 public class SAAList extends AAList {
 
@@ -9,7 +10,7 @@ public class SAAList extends AAList {
     }
 
     public SAAList() {
-        this(defaultSize);
+        this(Globals.defaultSize);
     }
 
     @Override

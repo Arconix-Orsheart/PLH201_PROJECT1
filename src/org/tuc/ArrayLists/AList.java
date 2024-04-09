@@ -1,4 +1,4 @@
-package org.tuc.ArrayLists;
+package org.tuc.arraylists;
 
 import org.tuc.Element;
 import org.tuc.Globals;

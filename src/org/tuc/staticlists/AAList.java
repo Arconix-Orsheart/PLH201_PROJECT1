@@ -1,4 +1,4 @@
-package org.tuc.StaticLinkedLists;
+package org.tuc.staticlists;
 
 import org.tuc.Element;
 import org.tuc.Globals;

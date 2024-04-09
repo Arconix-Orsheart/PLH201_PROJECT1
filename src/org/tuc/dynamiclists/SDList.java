@@ -1,4 +1,4 @@
-package org.tuc.DynamicLinkedLists;
+package org.tuc.dynamiclists;
 
 import org.tuc.Element;
 

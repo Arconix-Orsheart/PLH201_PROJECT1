@@ -1,8 +1,8 @@
-package org.tuc.ArrayLists;
+package org.tuc.arraylists;
 
 import org.tuc.Element;
 import org.tuc.Globals;
-import org.tuc.SearchAlgorithms.BinarySearch;
+import org.tuc.searchalgorithms.BinarySearch;
 
 public class SAList extends AList {
 

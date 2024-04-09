@@ -1,4 +1,4 @@
-package org.tuc.SearchAlgorithms;
+package org.tuc.searchalgorithms;
 
 import org.tuc.Element;
 import org.tuc.Globals;

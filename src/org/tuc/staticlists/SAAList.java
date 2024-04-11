@@ -24,6 +24,7 @@ public class SAAList extends AAList {
 
         while (MultiCounter.increase(1, curr != avail)
                 && MultiCounter.increase(1, listArray[curr].getKey() < element.getKey())) {
+            MultiCounter.increase(2);
             prev = curr;
             curr = getNextIndex(curr);
         }

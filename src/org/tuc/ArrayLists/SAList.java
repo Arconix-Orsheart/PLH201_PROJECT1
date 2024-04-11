@@ -28,6 +28,7 @@ public class SAList extends AList {
         if (MultiCounter.increase(1, index == Globals.beforeHead))
             index = -1;
         for (int i = listSize - 1; MultiCounter.increase(1, i > index); i--) {
+            MultiCounter.increase(2);
             listArray[i + 1] = listArray[i];
         }
         listArray[index + 1] = element;

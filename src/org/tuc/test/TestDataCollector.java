@@ -78,7 +78,7 @@ public class TestDataCollector {
 				if (countCols == 0) {
 					printstream.printf("%" + columnHeadingLength + "d", row.get(countCols));
 				} else {
-					printstream.printf("%" + columnHeadingLength + ".3f", (Float) row.get(countCols));
+					printstream.printf("%" + columnHeadingLength + ".3f", row.get(countCols));
 				}
 				if (countCols < headings.size() - 1) {
 					printstream.print(separator);

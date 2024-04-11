@@ -19,6 +19,7 @@ public class SDList extends DList {
 
         while (MultiCounter.increase(1, curr != null)
                 && MultiCounter.increase(1, curr.getElement().getKey() < element.getKey())) {
+            MultiCounter.increase(2);
             prev = curr;
             curr = curr.getNext();
         }

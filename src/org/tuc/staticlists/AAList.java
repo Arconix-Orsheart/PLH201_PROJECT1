@@ -41,6 +41,7 @@ public class AAList implements List {
         int curr = head;
         int prev = Globals.beforeHead;
         while (MultiCounter.increase(1, curr != avail) && MultiCounter.increase(1, listArray[curr].getKey() != key)) {
+            MultiCounter.increase(2);
             prev = curr;
             curr = getNextIndex(curr);
         }

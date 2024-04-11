@@ -31,6 +31,7 @@ public class DList implements List {
         Node prev = new Node(null, head);
 
         while (MultiCounter.increase(1, curr != null) && MultiCounter.increase(1, curr.getElement().getKey() != key)) {
+            MultiCounter.increase(2);
             prev = curr;
             curr = curr.getNext();
         }

@@ -1,39 +1,41 @@
 package org.tuc.test;
 
+import java.util.ArrayList;
+
 import org.tuc.Globals;
 import org.tuc.List;
 import org.tuc.counter.MultiCounter;
 import org.tuc.elements.MyElement;
 
 public class Tester {
-	/**
-	 * array of number of input elements for each test
-	 */
-	private List[] lists;
 
-	private int[] allElements;
+	private ArrayList<List> lists;
+
+	private int[] randomKeys;
+
+	private int currentKey;
 
 	private int numOfElements;
 
-	private int numOfLists;
+	private int minKeyValue;
 
-	/**
-	 * the lower bound of the generated keys to use
-	 */
-	private int minIntNumber;
+	private int maxKeyValue;
 
-	/**
-	 * the upper bound of the generated keys to use
-	 */
-	private int maxIntNumber;
+	private enum ListMethod {
+		INSERT,
+		SEARCH,
+		DELETE
+	}
 
-	public Tester(int listsSize, int numOfElements, int minIntNumber, int maxIntNumber) {
-		lists = Globals.generateLists(numOfElements);
-		allElements = Globals.getRandomUniqueKeys(minIntNumber, maxIntNumber, numOfElements);
-		this.numOfElements = numOfElements;
-		this.minIntNumber = minIntNumber;
-		this.maxIntNumber = maxIntNumber;
-		this.numOfLists = 0;
+	public Tester() {
+	}
+
+	public void setup(ArrayList<List> lists, int numOfElements, int minKeyValue, int maxKeyValue) {
+		this.lists = lists;
+		randomKeys = Globals.getRandomKeys(minKeyValue, maxKeyValue, numOfElements);
+		currentKey = 0;
+		this.minKeyValue = minKeyValue;
+		this.maxKeyValue = maxKeyValue;
 	}
 
 	public void doTest(String testName) throws Exception {
@@ -41,75 +43,72 @@ public class Tester {
 
 		long totalStatementCount;
 		long totalLevelCount;
+		long totalTimeTaken;
+
+		ListMethod[] methods = { ListMethod.INSERT, ListMethod.SEARCH, ListMethod.DELETE };
 
 		System.out.println("Start tests " + testName);
-		System.out.println("maxIntNumber: " + maxIntNumber);
-		System.out.println("minIntNumber: " + minIntNumber);
-		System.out.println("**************************************");
-		System.out.println(
-				"Beware!: The total test time includes also the time needed to find existing and non existing keys to search,");
-		System.out.println("which skews the time data. The only meaningful time data is the failure time data");
-		System.out.println("**************************************");
+		System.out.println("maxKeyValue: " + maxKeyValue);
+		System.out.println("minKeyValue: " + minKeyValue);
+		System.out.println(Globals.divider);
+		for (List l : lists) {
+			long[] testMethodResult;
+			for (ListMethod m : methods) {
+				testMethodResult = testMethod(l, m);
+				for (Long res : testMethodResult)
+					System.out.println(res / getK());
+			}
+		}
 
 	}
 
-	private long[] testInsert(List list) {
-		long totalStatementCountInsert = 0;
-		long totalLevelCountInsert = 0;
-		long totalTimeTakenInsert = 0;
+	private long[] testMethod(List list, ListMethod method) {
+		long totalStatementCount = 0;
+		long totalLevelCount = 0;
+		long totalTimeTaken = 0;
 
-		long startTime = 0;
+		int numOfTrials = getK();
 
-		for (int i = 0; i < numOfElements; i++) {
-			MultiCounter.resetCounter(1);
-			MultiCounter.resetCounter(2);
+		for (int i = 0; i < numOfTrials; i++) {
+			MultiCounter.reset(1);
+			MultiCounter.reset(2);
 
-			startTime = System.nanoTime();
-			list.insert(new MyElement(allElements[i]));
-			totalTimeTakenInsert += (System.nanoTime() - startTime);
-			totalStatementCountInsert += MultiCounter.getCount(1);
-			totalLevelCountInsert += MultiCounter.getCount(2);
+			totalTimeTaken += timeMethod(list, method, randomKeys[i]);
+			totalStatementCount += MultiCounter.getCount(1);
+			totalLevelCount += MultiCounter.getCount(2);
 		}
-		return new long[] { totalStatementCountInsert, totalLevelCountInsert, totalTimeTakenInsert };
+		return new long[] { totalStatementCount, totalLevelCount, totalTimeTaken };
 	}
 
-	private long[] testDelete(List list) {
-		long totalStatementCountDelete = 0;
-		long totalLevelCountDelete = 0;
-		long totalTimeTakenDelete = 0;
-
+	private long timeMethod(List list, ListMethod method, int key) {
 		long startTime = 0;
+		long totalTime = 0;
 
-		for (int i = 0; i < numOfElements; i++) {
-			MultiCounter.resetCounter(1);
-			MultiCounter.resetCounter(2);
-
-			startTime = System.nanoTime();
-			list.delete(10);
-			totalTimeTakenDelete += (System.nanoTime() - startTime);
-			totalStatementCountDelete += MultiCounter.getCount(1);
-			totalLevelCountDelete += MultiCounter.getCount(2);
+		switch (method) {
+			case INSERT:
+				startTime = System.nanoTime();
+				list.insert(new MyElement(key));
+				totalTime = (System.nanoTime() - startTime);
+				break;
+			case SEARCH:
+				startTime = System.nanoTime();
+				list.search(key);
+				totalTime = (System.nanoTime() - startTime);
+				break;
+			case DELETE:
+				startTime = System.nanoTime();
+				list.delete(key);
+				totalTime = (System.nanoTime() - startTime);
+				break;
 		}
-		return new long[] { totalStatementCountDelete, totalLevelCountDelete, totalTimeTakenDelete };
+		return totalTime;
 	}
 
-	private long[] testSearch(List list) {
-		long totalStatementCountSearch = 0;
-		long totalLevelCountSearch = 0;
-		long totalTimeTakenSearch = 0;
-
-		long startTime = 0;
-
-		for (int i = 0; i < numOfElements; i++) {
-			MultiCounter.resetCounter(1);
-			MultiCounter.resetCounter(2);
-
-			startTime = System.nanoTime();
-			list.search(10);
-			totalTimeTakenSearch += (System.nanoTime() - startTime);
-			totalStatementCountSearch += MultiCounter.getCount(1);
-			totalLevelCountSearch += MultiCounter.getCount(2);
-		}
-		return new long[] { totalStatementCountSearch, totalLevelCountSearch, totalTimeTakenSearch };
+	private int getK() {
+		if (numOfElements < 201)
+			return 10;
+		if (numOfElements < 1001)
+			return 50;
+		return 100;
 	}
 }

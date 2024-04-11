@@ -3,6 +3,7 @@ package org.tuc.arraylists;
 import org.tuc.Element;
 import org.tuc.Globals;
 import org.tuc.List;
+import org.tuc.counter.MultiCounter;
 
 public class AList implements List {
 
@@ -20,7 +21,7 @@ public class AList implements List {
 
     @Override
     public boolean insert(Element element) {
-        if (element == null || listSize >= listArray.length)
+        if (MultiCounter.increase(1, element == null) || MultiCounter.increase(1, listSize >= listArray.length))
             return false;
         listArray[listSize++] = element;
         return true;
@@ -28,8 +29,8 @@ public class AList implements List {
 
     protected int findIndex(int key) {
         int checkIdx = Globals.notFound;
-        for (int i = 0; i < listSize; i++)
-            if (listArray[i].getKey() == key) {
+        for (int i = 0; MultiCounter.increase(1, i < listSize); i++)
+            if (MultiCounter.increase(1, listArray[i].getKey() == key)) {
                 checkIdx = i;
                 break;
             }
@@ -39,10 +40,10 @@ public class AList implements List {
     @Override
     public boolean delete(int key) {
         int checkIdx = findIndex(key);
-        if (checkIdx == Globals.notFound)
+        if (MultiCounter.increase(1, checkIdx == Globals.notFound))
             return false;
 
-        for (int i = checkIdx; i < listSize - 1; i++)
+        for (int i = checkIdx; MultiCounter.increase(1, i < listSize - 1); i++)
             listArray[i] = listArray[i + 1];
         listArray[listSize - 1] = null;
         listSize--;
@@ -52,7 +53,7 @@ public class AList implements List {
     @Override
     public Element search(int key) {
         int checkIdx = findIndex(key);
-        if (checkIdx == Globals.notFound)
+        if (MultiCounter.increase(1, checkIdx == Globals.notFound))
             return null;
         return listArray[checkIdx];
 

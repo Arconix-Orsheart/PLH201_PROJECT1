@@ -2,6 +2,7 @@ package org.tuc.dynamiclists;
 
 import org.tuc.Element;
 import org.tuc.List;
+import org.tuc.counter.MultiCounter;
 
 public class DList implements List {
 
@@ -15,10 +16,10 @@ public class DList implements List {
 
     @Override
     public boolean insert(Element element) {
-        if (element == null)
+        if (MultiCounter.increase(1, element == null))
             return false;
         Node prev = tail;
-        if (head == null)
+        if (MultiCounter.increase(1, head == null))
             tail = head = new Node(element);
         else
             prev.setNext(tail = new Node(element));
@@ -29,7 +30,7 @@ public class DList implements List {
         Node curr = head;
         Node prev = new Node(null, head);
 
-        while (curr != null && curr.getElement().getKey() != key) {
+        while (MultiCounter.increase(1, curr != null) && MultiCounter.increase(1, curr.getElement().getKey() != key)) {
             prev = curr;
             curr = curr.getNext();
         }
@@ -45,9 +46,9 @@ public class DList implements List {
         Node prev = getPreviousNode(key);
         Node curr = prev.getNext();
 
-        if (curr == null)
+        if (MultiCounter.increase(1, curr == null))
             return false;
-        if (curr == head)
+        if (MultiCounter.increase(1, curr == head))
             head = head.getNext();
         else
             prev.setNext(curr.getNext());
@@ -58,7 +59,7 @@ public class DList implements List {
     @Override
     public Element search(int key) {
         Node res = getNode(key);
-        if (res == null)
+        if (MultiCounter.increase(1, res == null))
             return null;
         return res.getElement();
     }

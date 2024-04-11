@@ -3,6 +3,7 @@ package org.tuc.staticlists;
 import org.tuc.Element;
 import org.tuc.Globals;
 import org.tuc.List;
+import org.tuc.counter.MultiCounter;
 
 public class AAList implements List {
 
@@ -27,7 +28,7 @@ public class AAList implements List {
 
     @Override
     public boolean insert(Element element) {
-        if (element == null || avail == Globals.notFound)
+        if (MultiCounter.increase(1, element == null) || MultiCounter.increase(1, avail == Globals.notFound))
             return false;
         int newNode = getAvailNode();
         listArray[newNode] = element;
@@ -39,7 +40,7 @@ public class AAList implements List {
     private int getPreviousNode(int key) {
         int curr = head;
         int prev = Globals.beforeHead;
-        while (curr != avail && listArray[curr].getKey() != key) {
+        while (MultiCounter.increase(1, curr != avail) && MultiCounter.increase(1, listArray[curr].getKey() != key)) {
             prev = curr;
             curr = getNextIndex(curr);
         }
@@ -60,15 +61,15 @@ public class AAList implements List {
     }
 
     protected int getNextIndex(int index) {
-        if (index == Globals.notFound)
+        if (MultiCounter.increase(1, index == Globals.notFound))
             return Globals.notFound;
-        if (index == Globals.beforeHead)
+        if (MultiCounter.increase(1, index == Globals.beforeHead))
             return head;
         return listArray_next[index];
     }
 
     protected void setNextNode(int index, int node) {
-        if (index == Globals.beforeHead)
+        if (MultiCounter.increase(1, index == Globals.beforeHead))
             head = node;
         else
             listArray_next[index] = node;
@@ -80,7 +81,7 @@ public class AAList implements List {
         int curr = getNextIndex(prev);
         int next = getNextIndex(curr);
 
-        if (curr == Globals.notFound)
+        if (MultiCounter.increase(1, curr == Globals.notFound))
             return false;
 
         setNextNode(prev, next);
@@ -93,7 +94,7 @@ public class AAList implements List {
     public Element search(int key) {
         int curr = getNextIndex(getPreviousNode(key));
 
-        if (curr == Globals.notFound)
+        if (MultiCounter.increase(1, curr == Globals.notFound))
             return null;
 
         return listArray[curr];

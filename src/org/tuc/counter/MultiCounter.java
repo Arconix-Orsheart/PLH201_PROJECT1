@@ -27,7 +27,7 @@ public class MultiCounter {
 	 * 
 	 * @param counterIndex The counter to reset
 	 */
-	public static void resetCounter(int counterIndex) {
+	public static void reset(int counterIndex) {
 		if (counterIndex - 1 < counters.length)
 			counters[counterIndex - 1] = 0;
 	}
@@ -52,10 +52,15 @@ public class MultiCounter {
 	 * @param counterIndex The counter to modify
 	 * @return
 	 */
-	public static boolean increaseCounter(int counterIndex) {
+	public static boolean increase(int counterIndex) {
 		if (counterIndex - 1 < counters.length)
 			counters[counterIndex - 1]++;
 		return true;
+	}
+
+	public static boolean increase(int counterIndex, boolean comparison) {
+		increase(counterIndex);
+		return comparison;
 	}
 
 	/**
@@ -68,9 +73,14 @@ public class MultiCounter {
 	 * @param step         The amount to increase the counter
 	 * @return always true
 	 */
-	public static boolean increaseCounter(int counterIndex, int step) {
+	public static boolean increase(int counterIndex, int step) {
 		if (counterIndex - 1 < counters.length)
 			counters[counterIndex - 1] = counters[counterIndex - 1] + step;
 		return true;
+	}
+
+	public static boolean increase(int counterIndex, int step, boolean comparison) {
+		increase(counterIndex, step);
+		return comparison;
 	}
 }

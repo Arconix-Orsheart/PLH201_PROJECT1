@@ -2,6 +2,7 @@ package org.tuc.staticlists;
 
 import org.tuc.Element;
 import org.tuc.Globals;
+import org.tuc.counter.MultiCounter;
 
 public class SAAList extends AAList {
 
@@ -15,18 +16,19 @@ public class SAAList extends AAList {
 
     @Override
     public boolean insert(Element element) {
-        if (avail == Globals.notFound)
+        if (MultiCounter.increase(1, avail == Globals.notFound))
             return false;
 
         int curr = head;
         int prev = Globals.beforeHead;
 
-        while (curr != avail && listArray[curr].getKey() < element.getKey()) {
+        while (MultiCounter.increase(1, curr != avail)
+                && MultiCounter.increase(1, listArray[curr].getKey() < element.getKey())) {
             prev = curr;
             curr = getNextIndex(curr);
         }
 
-        if (curr == avail)
+        if (MultiCounter.increase(1, curr == avail))
             return super.insert(element);
 
         int newNode = getAvailNode();

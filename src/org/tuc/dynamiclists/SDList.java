@@ -1,6 +1,7 @@
 package org.tuc.dynamiclists;
 
 import org.tuc.Element;
+import org.tuc.counter.MultiCounter;
 
 public class SDList extends DList {
 
@@ -10,20 +11,21 @@ public class SDList extends DList {
 
     @Override
     public boolean insert(Element element) {
-        if (element == null)
+        if (MultiCounter.increase(1, element == null))
             return false;
 
         Node curr = head;
         Node prev = new Node(null, head);
 
-        while (curr != null && curr.getElement().getKey() < element.getKey()) {
+        while (MultiCounter.increase(1, curr != null)
+                && MultiCounter.increase(1, curr.getElement().getKey() < element.getKey())) {
             prev = curr;
             curr = curr.getNext();
         }
 
         prev.setNext(new Node(element, curr));
 
-        if (curr == head)
+        if (MultiCounter.increase(1, curr == head))
             head = prev.getNext();
 
         return true;

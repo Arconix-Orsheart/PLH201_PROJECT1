@@ -83,4 +83,5 @@ public class MultiCounter {
 		increase(counterIndex, step);
 		return comparison;
 	}
+
 }

@@ -16,7 +16,7 @@ public class SAAList extends AAList {
 
     @Override
     public boolean insert(Element element) {
-        if (MultiCounter.increase(1, avail == Globals.notFound))
+        if (avail == Globals.notFound)
             return false;
 
         int curr = head;

@@ -28,7 +28,7 @@ public class AAList implements List {
 
     @Override
     public boolean insert(Element element) {
-        if (MultiCounter.increase(1, element == null) || MultiCounter.increase(1, avail == Globals.notFound))
+        if (element == null || avail == Globals.notFound)
             return false;
         int newNode = getAvailNode();
         listArray[newNode] = element;

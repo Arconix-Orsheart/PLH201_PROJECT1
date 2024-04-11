@@ -14,16 +14,16 @@ public class TestDataCollector {
 	/**
 	 * Holds the measurements as a list for each row
 	 */
-	private List<List> rows;
+	private List<List<String>> rows;
 
 	/**
 	 * Constructor
 	 * 
 	 * @param headings Headings
 	 */
-	public TestDataCollector(List headings) {
+	public TestDataCollector(List<String> headings) {
 		this.headings = headings;
-		rows = new ArrayList();
+		rows = new ArrayList<>();
 	}
 
 	/**
@@ -31,7 +31,7 @@ public class TestDataCollector {
 	 * 
 	 * @param row row with measurements
 	 */
-	public void addRow(List row) {
+	public void addRow(List<String> row) {
 		rows.add(row);
 	}
 
@@ -71,12 +71,12 @@ public class TestDataCollector {
 
 		int columnHeadingLength;
 		for (countRows = 0; countRows < rows.size(); countRows++) {
-			List row = rows.get(countRows);
+			List<String> row = rows.get(countRows);
 			for (countCols = 0; countCols < row.size(); countCols++) {
 				columnHeadingLength = headings.get(countCols).toString().length();
 				// first column is an integer, other columns a float
 				if (countCols == 0) {
-					printstream.printf("%" + columnHeadingLength + "d", (Integer) row.get(countCols));
+					printstream.printf("%" + columnHeadingLength + "d", row.get(countCols));
 				} else {
 					printstream.printf("%" + columnHeadingLength + ".3f", (Float) row.get(countCols));
 				}

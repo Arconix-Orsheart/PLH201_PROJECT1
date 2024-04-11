@@ -56,7 +56,7 @@ public class Tester {
 			for (ListMethod m : methods) {
 				testMethodResult = testMethod(l, m);
 				for (Long res : testMethodResult)
-					System.out.println(res / getK());
+					System.out.println((float) res / getK());
 			}
 		}
 

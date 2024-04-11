@@ -2,6 +2,7 @@ package org.tuc.searchalgorithms;
 
 import org.tuc.Element;
 import org.tuc.Globals;
+import org.tuc.counter.MultiCounter;
 
 public class BinarySearch {
 
@@ -13,11 +14,15 @@ public class BinarySearch {
         int a = 0, b = dataSize;
         int m = 0;
 
-        while (a < b) {
+        while (MultiCounter.increase(1, a < b)) {
+            MultiCounter.increase(2);
+
+            MultiCounter.increase(1);
             m = a + (b - a) / 2;
-            if (data[m].getKey() == key)
+
+            if (MultiCounter.increase(1, data[m].getKey() == key))
                 return m;
-            if (data[m].getKey() < key)
+            if (MultiCounter.increase(1, data[m].getKey() < key))
                 a = m + 1;
             else
                 b = m;

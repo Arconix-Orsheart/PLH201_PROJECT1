@@ -11,7 +11,7 @@ public class SDList extends DList {
 
     @Override
     public boolean insert(Element element) {
-        if (MultiCounter.increase(1, element == null))
+        if (element == null)
             return false;
 
         Node curr = head;

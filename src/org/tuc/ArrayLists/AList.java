@@ -21,7 +21,7 @@ public class AList implements List {
 
     @Override
     public boolean insert(Element element) {
-        if (MultiCounter.increase(1, element == null) || MultiCounter.increase(1, listSize >= listArray.length))
+        if (element == null || listSize >= listArray.length)
             return false;
         listArray[listSize++] = element;
         return true;
@@ -29,11 +29,12 @@ public class AList implements List {
 
     protected int findIndex(int key) {
         int checkIdx = Globals.notFound;
-        for (int i = 0; MultiCounter.increase(1, i < listSize); i++)
+        for (int i = 0; MultiCounter.increase(1, i < listSize); i++) {
             if (MultiCounter.increase(1, listArray[i].getKey() == key)) {
                 checkIdx = i;
                 break;
             }
+        }
         return checkIdx;
     }
 
@@ -43,8 +44,10 @@ public class AList implements List {
         if (MultiCounter.increase(1, checkIdx == Globals.notFound))
             return false;
 
-        for (int i = checkIdx; MultiCounter.increase(1, i < listSize - 1); i++)
+        for (int i = checkIdx; MultiCounter.increase(1, i < listSize - 1); i++) {
+
             listArray[i] = listArray[i + 1];
+        }
         listArray[listSize - 1] = null;
         listSize--;
         return true;

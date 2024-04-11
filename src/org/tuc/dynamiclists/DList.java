@@ -16,7 +16,7 @@ public class DList implements List {
 
     @Override
     public boolean insert(Element element) {
-        if (element == null)
+        if (MultiCounter.increase(1, element == null))
             return false;
         Node prev = tail;
         if (MultiCounter.increase(1, head == null))
@@ -31,7 +31,6 @@ public class DList implements List {
         Node prev = new Node(null, head);
 
         while (MultiCounter.increase(1, curr != null) && MultiCounter.increase(1, curr.getElement().getKey() != key)) {
-            MultiCounter.increase(2);
             prev = curr;
             curr = curr.getNext();
         }

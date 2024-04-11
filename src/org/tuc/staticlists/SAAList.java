@@ -16,7 +16,7 @@ public class SAAList extends AAList {
 
     @Override
     public boolean insert(Element element) {
-        if (avail == Globals.notFound)
+        if (MultiCounter.increase(1, avail == Globals.notFound))
             return false;
 
         int curr = head;
@@ -24,7 +24,6 @@ public class SAAList extends AAList {
 
         while (MultiCounter.increase(1, curr != avail)
                 && MultiCounter.increase(1, listArray[curr].getKey() < element.getKey())) {
-            MultiCounter.increase(2);
             prev = curr;
             curr = getNextIndex(curr);
         }

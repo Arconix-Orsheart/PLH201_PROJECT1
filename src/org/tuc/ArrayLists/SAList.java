@@ -22,7 +22,7 @@ public class SAList extends AList {
 
     @Override
     public boolean insert(Element element) {
-        if (element == null || listSize >= listArray.length)
+        if (MultiCounter.increase(1, element == null) || MultiCounter.increase(1, listSize >= listArray.length))
             return false;
         int index = BinarySearch.search(listArray, listSize, element.getKey(), false);
         if (MultiCounter.increase(1, index == Globals.beforeHead))

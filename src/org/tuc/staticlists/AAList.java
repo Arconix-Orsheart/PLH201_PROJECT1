@@ -28,7 +28,7 @@ public class AAList implements List {
 
     @Override
     public boolean insert(Element element) {
-        if (element == null || avail == Globals.notFound)
+        if (MultiCounter.increase(1, element == null) || MultiCounter.increase(1, avail == Globals.notFound))
             return false;
         int newNode = getAvailNode();
         listArray[newNode] = element;
@@ -41,7 +41,6 @@ public class AAList implements List {
         int curr = head;
         int prev = Globals.beforeHead;
         while (MultiCounter.increase(1, curr != avail) && MultiCounter.increase(1, listArray[curr].getKey() != key)) {
-            MultiCounter.increase(2);
             prev = curr;
             curr = getNextIndex(curr);
         }

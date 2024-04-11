@@ -11,18 +11,21 @@ public class TestDataCollector {
 	 */
 	private List<String> headings;
 
+	private List<String> listNames;
+
 	/**
 	 * Holds the measurements as a list for each row
 	 */
-	private List<List<String>> rows;
+	private List<List<Number>> rows;
 
 	/**
 	 * Constructor
 	 * 
 	 * @param headings Headings
 	 */
-	public TestDataCollector(List<String> headings) {
-		this.headings = headings;
+	public TestDataCollector(List<String> listNames) {
+		this.headings = new ArrayList<>();
+		this.listNames = listNames;
 		rows = new ArrayList<>();
 	}
 
@@ -31,8 +34,12 @@ public class TestDataCollector {
 	 * 
 	 * @param row row with measurements
 	 */
-	public void addRow(List<String> row) {
+	public void addRow(List<Number> row) {
 		rows.add(row);
+	}
+
+	public void setHeading(List<String> headings) {
+		this.headings = headings;
 	}
 
 	public void toScreen() {
@@ -71,15 +78,12 @@ public class TestDataCollector {
 
 		int columnHeadingLength;
 		for (countRows = 0; countRows < rows.size(); countRows++) {
-			List<String> row = rows.get(countRows);
+			List<Number> row = rows.get(countRows);
+			printstream.print(listNames.get(countCols));
 			for (countCols = 0; countCols < row.size(); countCols++) {
 				columnHeadingLength = headings.get(countCols).toString().length();
 				// first column is an integer, other columns a float
-				if (countCols == 0) {
-					printstream.printf("%" + columnHeadingLength + "d", row.get(countCols));
-				} else {
-					printstream.printf("%" + columnHeadingLength + ".3f", row.get(countCols));
-				}
+				printstream.printf("%" + columnHeadingLength + ".2f", (Float) row.get(countCols));
 				if (countCols < headings.size() - 1) {
 					printstream.print(separator);
 				}

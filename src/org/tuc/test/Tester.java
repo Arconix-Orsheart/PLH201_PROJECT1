@@ -3,6 +3,7 @@ package org.tuc.test;
 import java.util.ArrayList;
 
 import org.tuc.Globals;
+import org.tuc.Globals.ListMethod;
 import org.tuc.List;
 import org.tuc.counter.MultiCounter;
 import org.tuc.elements.MyElement;
@@ -11,73 +12,76 @@ public class Tester {
 
 	private ArrayList<List> lists;
 
+	private int[] N;
+
 	private int[] randomKeys;
 
-	private int currentKey;
-
-	private int numOfElements;
-
-	private int minKeyValue;
-
-	private int maxKeyValue;
-
-	private enum ListMethod {
-		INSERT,
-		SEARCH,
-		DELETE
+	public Tester(int[] N) {
+		this.N = N;
 	}
 
-	public Tester() {
+	private void setup(int n) {
+		this.lists = Globals.generateLists(n + 2 * Globals.getK(n));
+		int[] keyValues = Globals.getKeyValues(n);
+		this.randomKeys = Globals.getRandomKeys(keyValues[0], keyValues[1], n);
+		for (List l : lists)
+			for (int k : keyValues)
+				l.insert(new MyElement(k));
+
 	}
 
-	public void setup(ArrayList<List> lists, int numOfElements, int minKeyValue, int maxKeyValue) {
-		this.lists = lists;
-		randomKeys = Globals.getRandomKeys(minKeyValue, maxKeyValue, numOfElements);
-		currentKey = 0;
-		this.minKeyValue = minKeyValue;
-		this.maxKeyValue = maxKeyValue;
-	}
-
-	public void doTest(String testName) throws Exception {
+	public void doTest(ListMethod method) throws Exception {
 		long totalTestStartTimeNano, totalTestEndTimeNano;
 
-		long totalStatementCount;
-		long totalLevelCount;
+		long totalActionsCount;
 		long totalTimeTaken;
 
-		ListMethod[] methods = { ListMethod.INSERT, ListMethod.SEARCH, ListMethod.DELETE };
-
-		System.out.println("Start tests " + testName);
-		System.out.println("maxKeyValue: " + maxKeyValue);
-		System.out.println("minKeyValue: " + minKeyValue);
+		System.out.println("Start test: " + method);
 		System.out.println(Globals.divider);
-		for (List l : lists) {
-			long[] testMethodResult;
-			for (ListMethod m : methods) {
-				testMethodResult = testMethod(l, m);
-				for (Long res : testMethodResult)
-					System.out.println((float) res / getK());
+
+		java.util.List<String> resultHeadings = new ArrayList<>();
+		resultHeadings.add("Lists");
+
+		TestDataCollector timeDataCollector = new TestDataCollector(Globals.generateListNames());
+		TestDataCollector actionDataCollector = new TestDataCollector(Globals.generateListNames());
+
+		for (int n : N) {
+			java.util.List<Number> timeDataRow = new ArrayList<>();
+			java.util.List<Number> actionsDataRow = new ArrayList<>();
+			resultHeadings.add("N = " + n);
+			setup(n);
+			for (List l : lists) {
+				long[] testMethodResults = testMethod(l, method, n);
+				timeDataRow.add((float) testMethodResults[0] / Globals.getK(n));
+				actionsDataRow.add((float) testMethodResults[1] / Globals.getK(n));
 			}
+			timeDataCollector.addRow(timeDataRow);
+			actionDataCollector.addRow(actionsDataRow);
 		}
+
+		timeDataCollector.setHeading(resultHeadings);
+		actionDataCollector.setHeading(resultHeadings);
+
+		timeDataCollector.toScreen();
+		timeDataCollector.toFile(method + "_TIME.csv");
+		actionDataCollector.toScreen();
+		actionDataCollector.toFile(method + "_ACTIONS.csv");
 
 	}
 
-	private long[] testMethod(List list, ListMethod method) {
-		long totalStatementCount = 0;
-		long totalLevelCount = 0;
+	private long[] testMethod(List list, ListMethod method, int n) {
+		long totalActionsCount = 0;
 		long totalTimeTaken = 0;
 
-		int numOfTrials = getK();
+		int numOfTrials = Globals.getK(n);
 
 		for (int i = 0; i < numOfTrials; i++) {
 			MultiCounter.reset(1);
-			MultiCounter.reset(2);
 
 			totalTimeTaken += timeMethod(list, method, randomKeys[i]);
-			totalStatementCount += MultiCounter.getCount(1);
-			totalLevelCount += MultiCounter.getCount(2);
+			totalActionsCount += MultiCounter.getCount(1);
 		}
-		return new long[] { totalStatementCount, totalLevelCount, totalTimeTaken };
+		return new long[] { totalTimeTaken, totalActionsCount };
 	}
 
 	private long timeMethod(List list, ListMethod method, int key) {
@@ -102,13 +106,5 @@ public class Tester {
 				break;
 		}
 		return totalTime;
-	}
-
-	private int getK() {
-		if (numOfElements < 201)
-			return 10;
-		if (numOfElements < 1001)
-			return 50;
-		return 100;
 	}
 }

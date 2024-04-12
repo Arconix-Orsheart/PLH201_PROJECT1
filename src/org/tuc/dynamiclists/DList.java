@@ -2,7 +2,7 @@ package org.tuc.dynamiclists;
 
 import org.tuc.Element;
 import org.tuc.List;
-import org.tuc.counter.MultiCounter;
+import org.tuc.tools.MultiCounter;
 
 public class DList implements List {
 

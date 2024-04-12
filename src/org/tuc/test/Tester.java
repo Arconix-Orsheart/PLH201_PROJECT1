@@ -3,11 +3,11 @@ package org.tuc.test;
 import java.util.ArrayList;
 
 import org.tuc.List;
-import org.tuc.counter.MultiCounter;
 import org.tuc.elements.MyElement;
 import org.tuc.tools.Globals;
 import org.tuc.tools.Globals.ListMethod;
 import org.tuc.tools.ListsInitiator;
+import org.tuc.tools.MultiCounter;
 
 public class Tester {
 
@@ -21,7 +21,7 @@ public class Tester {
 
 	private java.util.List<java.util.List<Number>> timeDataRows;
 
-	private java.util.List<java.util.List<Number>> actionsDataRows;
+	private java.util.List<java.util.List<Number>> operationsDataRows;
 
 	public Tester(int[] N, ListsInitiator initiator) {
 		this.N = N;
@@ -39,11 +39,11 @@ public class Tester {
 
 	private void initDataRows() {
 		timeDataRows = new ArrayList<>();
-		actionsDataRows = new ArrayList<>();
+		operationsDataRows = new ArrayList<>();
 
 		for (int i = 0; i < initiator.getNumOfLists(); i++) {
 			timeDataRows.add(new ArrayList<Number>());
-			actionsDataRows.add(new ArrayList<Number>());
+			operationsDataRows.add(new ArrayList<Number>());
 		}
 	}
 
@@ -58,7 +58,7 @@ public class Tester {
 		resultHeadings.add("L ");
 
 		TestDataCollector timeDataCollector = new TestDataCollector(Globals.generateListNames());
-		TestDataCollector actionsDataCollector = new TestDataCollector(Globals.generateListNames());
+		TestDataCollector operationsDataCollector = new TestDataCollector(Globals.generateListNames());
 
 		initDataRows();
 
@@ -69,7 +69,7 @@ public class Tester {
 			for (int i = 0; i < initiator.getNumOfLists(); i++) {
 				long[] testMethodResults = testMethod(lists[i], method, n);
 				timeDataRows.get(i).add((double) testMethodResults[0] / Globals.getK(n));
-				actionsDataRows.get(i).add((double) testMethodResults[1] / Globals.getK(n));
+				operationsDataRows.get(i).add((double) testMethodResults[1] / Globals.getK(n));
 			}
 		}
 		totalTestEndTimeNano = System.nanoTime();
@@ -77,8 +77,8 @@ public class Tester {
 		timeDataCollector.setHeading(resultHeadings);
 		timeDataCollector.setRows(timeDataRows);
 
-		actionsDataCollector.setHeading(resultHeadings);
-		actionsDataCollector.setRows(actionsDataRows);
+		operationsDataCollector.setHeading(resultHeadings);
+		operationsDataCollector.setRows(operationsDataRows);
 
 		totalTestTime = String.format("%.02f",
 				(double) (totalTestEndTimeNano - totalTestStartTimeNano) / 1000000000);
@@ -88,9 +88,9 @@ public class Tester {
 		timeDataCollector.toScreen();
 		timeDataCollector.toFile(method + "_TIME.csv");
 		System.out.println(Globals.divider);
-		System.out.println("Mean Actions Per List");
-		actionsDataCollector.toScreen();
-		actionsDataCollector.toFile(method + "_ACTIONS.csv");
+		System.out.println("Mean Operations Per List");
+		operationsDataCollector.toScreen();
+		operationsDataCollector.toFile(method + "_OPERATIONS.csv");
 
 	}
 

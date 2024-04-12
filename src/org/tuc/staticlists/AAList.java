@@ -2,8 +2,8 @@ package org.tuc.staticlists;
 
 import org.tuc.Element;
 import org.tuc.List;
-import org.tuc.counter.MultiCounter;
 import org.tuc.tools.Globals;
+import org.tuc.tools.MultiCounter;
 
 public class AAList implements List {
 

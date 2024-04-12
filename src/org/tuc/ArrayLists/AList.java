@@ -2,8 +2,8 @@ package org.tuc.arraylists;
 
 import org.tuc.Element;
 import org.tuc.List;
-import org.tuc.counter.MultiCounter;
 import org.tuc.tools.Globals;
+import org.tuc.tools.MultiCounter;
 
 public class AList implements List {
 

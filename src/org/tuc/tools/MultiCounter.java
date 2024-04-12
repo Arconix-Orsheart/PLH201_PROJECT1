@@ -1,4 +1,4 @@
-package org.tuc.counter;
+package org.tuc.tools;
 
 /**
  * A class with static member variables and methods that can be used to count

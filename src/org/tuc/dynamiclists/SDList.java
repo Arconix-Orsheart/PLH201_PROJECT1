@@ -1,7 +1,7 @@
 package org.tuc.dynamiclists;
 
 import org.tuc.Element;
-import org.tuc.counter.MultiCounter;
+import org.tuc.tools.MultiCounter;
 
 public class SDList extends DList {
 

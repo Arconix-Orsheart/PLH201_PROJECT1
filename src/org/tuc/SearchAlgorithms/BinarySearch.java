@@ -1,8 +1,8 @@
 package org.tuc.searchalgorithms;
 
 import org.tuc.Element;
-import org.tuc.Globals;
 import org.tuc.counter.MultiCounter;
+import org.tuc.tools.Globals;
 
 public class BinarySearch {
 

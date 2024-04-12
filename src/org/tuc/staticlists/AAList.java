@@ -1,9 +1,9 @@
 package org.tuc.staticlists;
 
 import org.tuc.Element;
-import org.tuc.Globals;
 import org.tuc.List;
 import org.tuc.counter.MultiCounter;
+import org.tuc.tools.Globals;
 
 public class AAList implements List {
 
@@ -40,7 +40,8 @@ public class AAList implements List {
     private int getPreviousNode(int key) {
         int curr = head;
         int prev = Globals.beforeHead;
-        while (MultiCounter.increase(1, curr != avail) && MultiCounter.increase(1, listArray[curr].getKey() != key)) {
+        while (MultiCounter.increase(1, curr != avail)
+                && MultiCounter.increase(1, listArray[curr].getKey() != key)) {
             prev = curr;
             curr = getNextIndex(curr);
         }
@@ -69,7 +70,7 @@ public class AAList implements List {
     }
 
     protected void setNextNode(int index, int node) {
-        if (MultiCounter.increase(1, index == Globals.beforeHead))
+        if (MultiCounter.increase(1, index == node) || MultiCounter.increase(1, index == Globals.beforeHead))
             head = node;
         else
             listArray_next[index] = node;

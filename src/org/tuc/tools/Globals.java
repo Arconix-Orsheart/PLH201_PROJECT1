@@ -1,8 +1,9 @@
-package org.tuc;
+package org.tuc.tools;
 
 import java.util.ArrayList;
 import java.util.Random;
 
+import org.tuc.List;
 import org.tuc.arraylists.AList;
 import org.tuc.arraylists.SAList;
 import org.tuc.dynamiclists.DList;
@@ -18,7 +19,7 @@ public class Globals {
 
     public static final int minKeyValue = 1;
 
-    public static final String divider = "**************************************";
+    public static final String divider = "*******************************************************************************************************************************";
 
     public static enum ListMethod {
         INSERT,
@@ -37,10 +38,18 @@ public class Globals {
         return randomInts;
     }
 
+    public static int getRandomUniqueKey(int minIntNumber, int maxIntNumber) {
+        return getRandomUniqueKeys(minIntNumber, maxIntNumber, 1)[0];
+    }
+
     public static int[] getRandomKeys(int minIntNumber, int maxIntNumber, int numberOfNumbers) {
         Random randomGenerator = new Random();
         int[] randomInts = randomGenerator.ints(minIntNumber, maxIntNumber + 1).limit(numberOfNumbers).toArray();
         return randomInts;
+    }
+
+    public static int getRandomKey(int minIntNumber, int maxIntNumber) {
+        return getRandomKeys(minIntNumber, maxIntNumber, 1)[0];
     }
 
     public static int getK(int n) {
@@ -51,15 +60,9 @@ public class Globals {
         return 100;
     }
 
-    public static ArrayList<List> generateLists(int numOfElements) {
-        ArrayList<List> lists = new ArrayList<List>();
-        lists.add(new DList());
-        lists.add(new SDList());
-        lists.add(new AAList(numOfElements));
-        lists.add(new SAAList(numOfElements));
-        lists.add(new AList(numOfElements));
-        lists.add(new SAList(numOfElements));
-        return lists;
+    public static List[] generateLists(int numOfElements) {
+        return new List[] { new DList(), new SDList(), new AAList(numOfElements), new SAAList(numOfElements),
+                new AList(numOfElements), new SAList(numOfElements) };
     }
 
     public static ArrayList<String> generateListNames() {

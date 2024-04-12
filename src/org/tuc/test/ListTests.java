@@ -44,25 +44,25 @@ public class ListTests {
 																										// 1000000,
 																										// 10000000 };
 
-	public static void main(String[] args) {
+	// public static void main(String[] args) {
 
-		// "real life" application
-		/*
-		 * Node[] students = new Node[1000];
-		 * students[0] = new StudentNode(2000030099, "Stefanos Karasavvidis");
-		 * students[1] = new StudentNode(1998030100, "Stefanos Karasavvidis");
-		 * students[2] = new StudentNode(2010030099, "Stefanos Karasavvidis");
-		 * students[3] = new StudentNode(1970030099, "Stefanos Karasavvidis");
-		 * ....
-		 * students[999] = new StudentNode(1992030099, "Stefanos Karasavvidis");
-		 * ....
-		 * 
-		 * Arrays.sort(students);
-		 * BinarySearch binarySearch = new BinarySearch(students);
-		 * 
-		 * // use it for finding a Student by id number
-		 * binarySearch.search(1998030100);
-		 */
+	// // "real life" application
+	// /*
+	// * Node[] students = new Node[1000];
+	// * students[0] = new StudentNode(2000030099, "Stefanos Karasavvidis");
+	// * students[1] = new StudentNode(1998030100, "Stefanos Karasavvidis");
+	// * students[2] = new StudentNode(2010030099, "Stefanos Karasavvidis");
+	// * students[3] = new StudentNode(1970030099, "Stefanos Karasavvidis");
+	// * ....
+	// * students[999] = new StudentNode(1992030099, "Stefanos Karasavvidis");
+	// * ....
+	// *
+	// * Arrays.sort(students);
+	// * BinarySearch binarySearch = new BinarySearch(students);
+	// *
+	// * // use it for finding a Student by id number
+	// * binarySearch.search(1998030100);
+	// */
 
-	}
+	// }
 }

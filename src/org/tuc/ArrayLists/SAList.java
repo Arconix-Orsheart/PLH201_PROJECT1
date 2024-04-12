@@ -1,9 +1,9 @@
 package org.tuc.arraylists;
 
 import org.tuc.Element;
-import org.tuc.Globals;
 import org.tuc.counter.MultiCounter;
 import org.tuc.searchalgorithms.BinarySearch;
+import org.tuc.tools.Globals;
 
 public class SAList extends AList {
 

@@ -25,9 +25,10 @@ public class SDList extends DList {
 
         prev.setNext(new Node(element, curr));
 
+        if (MultiCounter.increase(1, prev == tail) || MultiCounter.increase(1, head == null))
+            tail = prev.getNext();
         if (MultiCounter.increase(1, curr == head))
             head = prev.getNext();
-
         return true;
     }
 

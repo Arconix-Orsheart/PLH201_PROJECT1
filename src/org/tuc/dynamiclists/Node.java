@@ -7,13 +7,20 @@ public class Node {
     private Element element;
     private Node next;
 
+    /**
+     * Initiating the Node utilised by Lists 1a & 1b
+     * 
+     * @constructor
+     * @param element
+     * @param next
+     */
     protected Node(Element element, Node next) {
         this.element = element;
         this.next = next;
     }
 
-    protected Node(org.tuc.Element element2) {
-        this.element = element2;
+    protected Node(Element element) {
+        this.element = element;
     }
 
     public Element getElement() {

@@ -6,6 +6,12 @@ public class MyElement implements Element {
 
     private int key;
 
+    /**
+     * Initiating the implimentation of the Element Interface
+     * 
+     * @constructor
+     * @param key
+     */
     public MyElement(int key) {
         this.key = key;
     }

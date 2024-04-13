@@ -6,42 +6,50 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TestDataCollector {
-	/**
-	 * Holds the headings of the table
-	 */
+
+	// Holds the headings of the table
 	private List<String> headings;
 
+	// Holds the names of each List
 	private List<String> listNames;
 
-	/**
-	 * Holds the measurements as a list for each row
-	 */
+	// Holds the Heading for the Lists names
+	private String listsHeading;
+
+	// Holds the measurements as a list for each row
 	private List<List<Number>> rows;
 
 	/**
-	 * Constructor
+	 * @constructor
 	 * 
-	 * @param headings Headings
+	 * @param listNames
 	 */
-	public TestDataCollector(List<String> listNames) {
+	public TestDataCollector(List<String> listNames, String listsHeading) {
 		this.headings = new ArrayList<>();
+		this.rows = new ArrayList<>();
 		this.listNames = listNames;
-		rows = new ArrayList<>();
+		this.listsHeading = listsHeading;
 	}
 
 	/**
-	 * Adds a row with measurements
+	 * Set rows with measurements
 	 * 
-	 * @param row row with measurements
+	 * @param rows rows with measurements
 	 */
 	public void setRows(List<List<Number>> rows) {
 		this.rows = rows;
 	}
 
+	/**
+	 * Set headings of the table
+	 * 
+	 * @param heading headings of the table
+	 */
 	public void setHeading(List<String> headings) {
 		this.headings = headings;
 	}
 
+	// Print the table to console
 	public void toScreen() {
 		// print headings
 		this.print(System.out, " | ");
@@ -68,6 +76,7 @@ public class TestDataCollector {
 	private void print(PrintStream printstream, String separator) {
 		int countCols;
 		int countRows;
+		printstream.print(listsHeading + separator);
 		for (countCols = 0; countCols < headings.size(); countCols++) {
 			printstream.print(headings.get(countCols));
 			if (countCols < headings.size() - 1) {
@@ -79,12 +88,14 @@ public class TestDataCollector {
 		int columnHeadingLength;
 		for (countRows = 0; countRows < rows.size(); countRows++) {
 			List<Number> row = rows.get(countRows);
-			printstream.print(listNames.get(countRows) + separator);
+			// Before each row of measurements, add the name of the list tested
+			printstream.printf("%" + listsHeading.toString().length() + "s", listNames.get(countRows));
+			printstream.print(separator);
 			for (countCols = 0; countCols < row.size(); countCols++) {
-				columnHeadingLength = headings.get(countCols + 1).toString().length();
-				// first column is an integer, other columns a float
+				// Add enough space to align it with the spacing of the heading
+				columnHeadingLength = headings.get(countCols).toString().length();
 				printstream.printf("%" + columnHeadingLength + ".2f", (Double) row.get(countCols));
-				if (countCols + 1 < headings.size() - 1) {
+				if (countCols < headings.size() - 1) {
 					printstream.print(separator);
 				}
 			}

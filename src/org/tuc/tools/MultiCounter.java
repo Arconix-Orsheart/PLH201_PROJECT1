@@ -58,6 +58,7 @@ public class MultiCounter {
 		return true;
 	}
 
+	// Similar but returns the boolean expression as it is
 	public static boolean increase(int counterIndex, boolean comparison) {
 		increase(counterIndex);
 		return comparison;
@@ -79,6 +80,7 @@ public class MultiCounter {
 		return true;
 	}
 
+	// Similar but returns the boolean expression as it is
 	public static boolean increase(int counterIndex, int step, boolean comparison) {
 		increase(counterIndex, step);
 		return comparison;

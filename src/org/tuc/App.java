@@ -21,23 +21,23 @@ public class App {
             }
 
         };
+
         Tester tester = new Tester(N, initiator);
-        ListMethod[] methods = { ListMethod.INSERT, ListMethod.SEARCH,
+        ListMethod[] methods = {
+                ListMethod.INSERT,
+                ListMethod.SEARCH,
                 ListMethod.DELETE };
+
+        System.out.println(Globals.divider);
+        System.out.println("Setup Lists");
+        System.out.println(Globals.divider);
+        tester.setup();
+
         for (ListMethod m : methods)
             try {
                 tester.doTest(m);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
-        // int listSize = 5;
-        // SAAList l = new SAAList(listSize);
-        // int[] keys = Globals.getRandomKeys(1, 50, listSize);
-        // for (int i = 0; i < listSize; i++)
-        // l.insert(new MyElement(keys[i]));
-        // for (int i = 0; i < listSize; i++)
-        // l.delete(keys[i]);
-        // System.out.println("lol");
     }
 }

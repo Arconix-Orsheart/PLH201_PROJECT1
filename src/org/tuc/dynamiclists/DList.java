@@ -9,11 +9,23 @@ public class DList implements List {
     protected Node head;
     protected Node tail;
 
+    /**
+     * Initiating List 1a
+     * 
+     * @constructor
+     */
     public DList() {
         head = null;
         tail = null;
     }
 
+    /**
+     * Creates Node & adds it to the end of the List
+     * 
+     * @param element inserted in the new Node
+     * @return true if it succesfully inserts the element
+     *         false if it doesn't
+     */
     @Override
     public boolean insert(Element element) {
         if (MultiCounter.increase(1, element == null))
@@ -26,10 +38,17 @@ public class DList implements List {
         return true;
     }
 
+    /**
+     * Finds the first Node with the specified key and returns the previous one
+     * 
+     * @param key of the element to find
+     * @return previous Node
+     */
     private Node getPreviousNode(int key) {
         Node curr = head;
         Node prev = new Node(null, head);
 
+        // Iterates over the List until it finds the Element or it reaches the end
         while (MultiCounter.increase(1, curr != null) && MultiCounter.increase(1, curr.getElement().getKey() != key)) {
             prev = curr;
             curr = curr.getNext();
@@ -41,6 +60,13 @@ public class DList implements List {
         return getPreviousNode(key).getNext();
     }
 
+    /**
+     * Deletes the first Element with the specified key
+     * 
+     * @param key
+     * @return true if it succesfully deletes the element
+     *         false if it doesn't
+     */
     @Override
     public boolean delete(int key) {
         Node prev = getPreviousNode(key);
@@ -56,12 +82,24 @@ public class DList implements List {
         return true;
     }
 
+    /**
+     * Finds the first Element with the specified key
+     * 
+     * @param key
+     * @return Element if found,
+     *         null if not
+     */
     @Override
     public Element search(int key) {
         Node res = getNode(key);
         if (MultiCounter.increase(1, res == null))
             return null;
         return res.getElement();
+    }
+
+    @Override
+    public String toString() {
+        return "1a";
     }
 
 }

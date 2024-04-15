@@ -23,7 +23,7 @@ public class Globals {
 
     public static final int minKeyValue = 1;
 
-    public static final String divider = "*****************************************************************************************************************************";
+    public static final String divider = "*******************************************************************************************************************************************";
     public static final String listsHeading = "Lists";
 
     public static enum ListMethod {

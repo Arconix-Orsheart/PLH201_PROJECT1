@@ -33,6 +33,7 @@ public class SAAList extends AAList {
         if (MultiCounter.increase(1, avail == Globals.notFound))
             return false;
 
+        MultiCounter.increase(1, 2);
         int curr = head;
         int prev = Globals.beforeHead;
 
@@ -40,6 +41,7 @@ public class SAAList extends AAList {
         // one inserted, or until it reaches the end
         while (MultiCounter.increase(1, curr != avail)
                 && MultiCounter.increase(1, listArray[curr].getKey() < element.getKey())) {
+            MultiCounter.increase(1, 2);
             prev = curr;
             curr = getNextIndex(curr);
         }
@@ -49,8 +51,10 @@ public class SAAList extends AAList {
         if (MultiCounter.increase(1, curr == avail))
             return super.insert(element);
 
+        MultiCounter.increase(1, 2);
         int newNode = getAvailNode();
         listArray[newNode] = element;
+
         setNextNode(prev, newNode);
         setNextNode(newNode, curr);
         setNextNode(tail, avail);

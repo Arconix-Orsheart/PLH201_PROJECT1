@@ -44,6 +44,8 @@ public class AAList implements List {
         // If null or not available space in the list, return
         if (MultiCounter.increase(1, element == null) || MultiCounter.increase(1, avail == Globals.notFound))
             return false;
+
+        MultiCounter.increase(1, 3);
         int newNode = getAvailNode();
         listArray[newNode] = element;
         tail = newNode;
@@ -59,12 +61,14 @@ public class AAList implements List {
      * @return previous index of node
      */
     private int getPreviousNode(int key) {
+        MultiCounter.increase(1, 2);
         int curr = head;
         int prev = Globals.beforeHead;
 
         // Iterates over the List until it finds the Element or it reaches the end
         while (MultiCounter.increase(1, curr != avail)
                 && MultiCounter.increase(1, listArray[curr].getKey() != key)) {
+            MultiCounter.increase(1, 2);
             prev = curr;
             curr = getNextIndex(curr);
         }
@@ -77,6 +81,7 @@ public class AAList implements List {
      * @return available index of the node
      */
     protected int getAvailNode() {
+        MultiCounter.increase(1, 2);
         int res = avail;
         avail = getNextIndex(avail);
         return res;
@@ -88,9 +93,10 @@ public class AAList implements List {
      * @param index of node to be removed
      */
     protected void freeNode(int index) {
-        listArray[index] = null;
         setNextNode(index, avail);
         setNextNode(tail, index);
+
+        MultiCounter.increase(1);
         avail = index;
     }
 
@@ -106,11 +112,15 @@ public class AAList implements List {
 
     protected void setNextNode(int index, int node) {
         // Cases: Delete last available Element or Insert first Element
-        if (MultiCounter.increase(1, index == node) || MultiCounter.increase(1, index == Globals.beforeHead))
+        if (MultiCounter.increase(1, index == node) || MultiCounter.increase(1, index == Globals.beforeHead)) {
+            MultiCounter.increase(1);
             head = node;
+        }
         // For inbetween cases
-        else
+        else {
+            MultiCounter.increase(1);
             listArray_next[index] = node;
+        }
     }
 
     /**
@@ -122,6 +132,7 @@ public class AAList implements List {
      */
     @Override
     public boolean delete(int key) {
+        MultiCounter.increase(1, 3);
         int prev = getPreviousNode(key);
         int curr = getNextIndex(prev);
         int next = getNextIndex(curr);
@@ -144,6 +155,7 @@ public class AAList implements List {
      */
     @Override
     public Element search(int key) {
+        MultiCounter.increase(1);
         int curr = getNextIndex(getPreviousNode(key));
 
         if (MultiCounter.increase(1, curr == Globals.notFound))

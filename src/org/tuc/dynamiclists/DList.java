@@ -30,11 +30,15 @@ public class DList implements List {
     public boolean insert(Element element) {
         if (MultiCounter.increase(1, element == null))
             return false;
+        MultiCounter.increase(1);
         Node prev = tail;
-        if (MultiCounter.increase(1, head == null))
+        if (MultiCounter.increase(1, head == null)) {
+            MultiCounter.increase(1, 2);
             tail = head = new Node(element);
-        else
+        } else {
+            MultiCounter.increase(1);
             prev.setNext(tail = new Node(element));
+        }
         return true;
     }
 
@@ -45,11 +49,13 @@ public class DList implements List {
      * @return previous Node
      */
     private Node getPreviousNode(int key) {
+        MultiCounter.increase(1, 2);
         Node curr = head;
         Node prev = new Node(null, head);
 
         // Iterates over the List until it finds the Element or it reaches the end
         while (MultiCounter.increase(1, curr != null) && MultiCounter.increase(1, curr.getElement().getKey() != key)) {
+            MultiCounter.increase(1, 2);
             prev = curr;
             curr = curr.getNext();
         }
@@ -69,14 +75,16 @@ public class DList implements List {
      */
     @Override
     public boolean delete(int key) {
+        MultiCounter.increase(1, 2);
         Node prev = getPreviousNode(key);
         Node curr = prev.getNext();
 
         if (MultiCounter.increase(1, curr == null))
             return false;
-        if (MultiCounter.increase(1, curr == head))
+        if (MultiCounter.increase(1, curr == head)) {
+            MultiCounter.increase(1);
             head = head.getNext();
-        else
+        } else
             prev.setNext(curr.getNext());
 
         return true;
@@ -91,6 +99,7 @@ public class DList implements List {
      */
     @Override
     public Element search(int key) {
+        MultiCounter.increase(1);
         Node res = getNode(key);
         if (MultiCounter.increase(1, res == null))
             return null;

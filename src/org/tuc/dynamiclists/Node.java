@@ -1,6 +1,7 @@
 package org.tuc.dynamiclists;
 
 import org.tuc.Element;
+import org.tuc.tools.MultiCounter;
 
 public class Node {
 
@@ -36,6 +37,7 @@ public class Node {
     }
 
     public void setNext(Node next) {
+        MultiCounter.increase(1);
         this.next = next;
     }
 

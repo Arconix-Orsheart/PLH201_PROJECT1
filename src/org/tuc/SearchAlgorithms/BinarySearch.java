@@ -19,9 +19,11 @@ public class BinarySearch {
      */
     public static int search(Element[] data, int dataSize, int key, boolean exact) {
         // Indexes of Upper & Lower boundaries of the array
+        MultiCounter.increase(1, 2);
         int a = 0, b = dataSize;
 
         // Index of Middle Element between the boundaries
+        MultiCounter.increase(1);
         int m = 0;
 
         // Iterate over the array until the upper & lower boundaries have the same value
@@ -35,11 +37,15 @@ public class BinarySearch {
             if (MultiCounter.increase(1, data[m].getKey() == key))
                 return m;
             // Search upwards
-            if (MultiCounter.increase(1, data[m].getKey() < key))
+            if (MultiCounter.increase(1, data[m].getKey() < key)) {
+                MultiCounter.increase(1);
                 a = m + 1;
+            }
             // Search downwards
-            else
+            else {
+                MultiCounter.increase(1);
                 b = m;
+            }
         }
 
         // For original algorithm

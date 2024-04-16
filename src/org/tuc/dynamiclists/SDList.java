@@ -27,6 +27,7 @@ public class SDList extends DList {
         if (MultiCounter.increase(1, element == null))
             return false;
 
+        MultiCounter.increase(1, 2);
         Node curr = head;
         Node prev = new Node(null, head);
 
@@ -34,6 +35,7 @@ public class SDList extends DList {
         // one inserted, or until it reaches the end
         while (MultiCounter.increase(1, curr != null)
                 && MultiCounter.increase(1, curr.getElement().getKey() < element.getKey())) {
+            MultiCounter.increase(1, 2);
             prev = curr;
             curr = curr.getNext();
         }
@@ -41,10 +43,14 @@ public class SDList extends DList {
         prev.setNext(new Node(element, curr));
 
         // Set's the tail/head depending on the point of insert
-        if (MultiCounter.increase(1, prev == tail) || MultiCounter.increase(1, head == null))
+        if (MultiCounter.increase(1, prev == tail) || MultiCounter.increase(1, head == null)) {
+            MultiCounter.increase(1);
             tail = prev.getNext();
-        if (MultiCounter.increase(1, curr == head))
+        }
+        if (MultiCounter.increase(1, curr == head)) {
+            MultiCounter.increase(1);
             head = prev.getNext();
+        }
         return true;
     }
 

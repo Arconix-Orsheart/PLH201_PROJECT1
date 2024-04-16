@@ -37,6 +37,7 @@ public class AList implements List {
         // If null or not available space in the list, return
         if (MultiCounter.increase(1, element == null) || MultiCounter.increase(1, listSize >= listArray.length))
             return false;
+        MultiCounter.increase(1);
         listArray[listSize++] = element;
         return true;
     }
@@ -49,12 +50,14 @@ public class AList implements List {
      *         notFound = -1, if not
      */
     protected int findIndex(int key) {
+        MultiCounter.increase(1);
         int checkIdx = Globals.notFound;
 
         // Iterates over the List until it finds the Element or it reaches the end
         for (int i = 0; MultiCounter.increase(1, i < listSize); i++) {
             // Break from the loop if Element found
             if (MultiCounter.increase(1, listArray[i].getKey() == key)) {
+                MultiCounter.increase(1);
                 checkIdx = i;
                 break;
             }
@@ -71,6 +74,7 @@ public class AList implements List {
      */
     @Override
     public boolean delete(int key) {
+        MultiCounter.increase(1);
         int checkIdx = findIndex(key);
 
         // If not found, return
@@ -79,8 +83,11 @@ public class AList implements List {
 
         // If found, move every Element a cell to the left of the array,
         // beggining from the index of the found Element
-        for (int i = checkIdx; MultiCounter.increase(1, i < listSize - 1); i++)
+        for (int i = checkIdx; MultiCounter.increase(1, i < listSize - 1); i++) {
+            MultiCounter.increase(1);
             listArray[i] = listArray[i + 1];
+        }
+        MultiCounter.increase(1);
         listArray[listSize - 1] = null;
         listSize--;
         return true;
@@ -95,6 +102,7 @@ public class AList implements List {
      */
     @Override
     public Element search(int key) {
+        MultiCounter.increase(1);
         int checkIdx = findIndex(key);
 
         // If not found, return null

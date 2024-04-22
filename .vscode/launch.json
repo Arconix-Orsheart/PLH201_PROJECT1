@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "tests",
+            "request": "launch",
+            "mainClass": "org.tuc.test.tests",
+            "projectName": "PLH201_PROJECT1_CODE_5899eb6a"
+        },
+        {
+            "type": "java",
+            "name": "App",
+            "request": "launch",
+            "mainClass": "org.tuc.App",
+            "projectName": "PLH201_PROJECT1_CODE_5899eb6a"
+        },
+        {
+            "type": "java",
             "name": "App",
             "request": "launch",
             "mainClass": "org.tuc.App",

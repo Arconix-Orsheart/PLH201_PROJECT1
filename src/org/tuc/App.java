@@ -12,7 +12,7 @@ public class App {
 
             @Override
             public int getNumOfLists() {
-                return Globals.allLists;
+                return Globals.generateLists(1).length;
             }
 
             @Override

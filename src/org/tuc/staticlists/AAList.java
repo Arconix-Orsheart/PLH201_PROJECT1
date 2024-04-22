@@ -69,9 +69,12 @@ public class AAList implements List {
         while (MultiCounter.increase(1, curr != avail)
                 && MultiCounter.increase(1, listArray[curr].getKey() != key)) {
             MultiCounter.increase(1, 2);
+
             prev = curr;
             curr = getNextIndex(curr);
         }
+        if (MultiCounter.increase(1, curr == avail))
+            return Globals.notFound;
         return prev;
     }
 
@@ -143,6 +146,8 @@ public class AAList implements List {
         setNextNode(prev, next);
         freeNode(curr);
 
+        if (MultiCounter.getCount(1) == 20)
+            System.out.println("lol");
         return true;
     }
 

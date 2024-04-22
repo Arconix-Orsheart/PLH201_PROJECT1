@@ -46,20 +46,14 @@ public class SAList extends AList {
         MultiCounter.increase(1);
         int index = BinarySearch.search(listArray, listSize, element.getKey(), false);
 
-        // Case: Element should be places before the current head
-        if (MultiCounter.increase(1, index == Globals.beforeHead)) {
-            MultiCounter.increase(1);
-            index = -1;
-        }
-
         // Move every Element a cell to the right of the array,
         // beggining from the end of the array until the insertion index
-        for (int i = listSize - 1; MultiCounter.increase(1, i > index); i--) {
+        for (int i = listSize - 1; MultiCounter.increase(1, i >= index); i--) {
             MultiCounter.increase(1);
             listArray[i + 1] = listArray[i];
         }
         MultiCounter.increase(1);
-        listArray[index + 1] = element;
+        listArray[index] = element;
         listSize++;
         return true;
     }

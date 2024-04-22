@@ -51,12 +51,8 @@ public class BinarySearch {
         // For original algorithm
         if (MultiCounter.increase(1, exact))
             return Globals.notFound;
-        // For the altered version, If the Element should be before the First Element of
-        // the data array
-        if (MultiCounter.increase(1, dataSize == 0) || MultiCounter.increase(1, data[0].getKey() > key))
-            return Globals.beforeHead;
-        // For the altered version, other cases
-        return m;
+        // For the altered version
+        return a;
     }
 
     // Binary Search Algorithm, original version
